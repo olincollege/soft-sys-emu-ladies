@@ -1,5 +1,7 @@
 # EMU Ladies: A Gameboy Emulator
 
+by Annabelle Platt and Emma Mack
+
 ## Learnings From the Last Project
 
 Annabelle: The last project was very good for me in terms of becoming more comfortable working with C, working with bitwise operations, starting to get a handle on common graphics libraries like SDL. I do think that the way I structured the project ended up not being as streamlined as it could have been. I also struggled a lot without having classes available. For this project I will utilize my new knowledge and expand my understanding of SDL. We will use C++, which is very similar to C but has classes, so this will make structuring for code-sharing significantly easier, but I will also probably suggest structuring the project differently than last time. 
