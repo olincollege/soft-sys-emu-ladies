@@ -1,5 +1,6 @@
 #include "register.h"
 #include <stdint.h>
+#include <cstdio>
 
 class Cpu {
 public:
@@ -10,7 +11,8 @@ public:
 
     Cpu();
 
-
+    int write_memory(uint8_t address, uint8_t data);
+    uint8_t read_memory(uint8_t address);
 
 private:
     uint8_t memory[0x10000];
