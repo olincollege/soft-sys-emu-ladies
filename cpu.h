@@ -10,6 +10,10 @@ public:
     Register HL;
 
     Cpu();
+    uint16_t get_PC();
+    uint16_t get_SP();
+    void set_PC(uint16_t bytes);
+    void set_SP(uint16_t bytes);
 
     int write_memory(uint8_t address, uint8_t data);
     uint8_t read_memory(uint8_t address);

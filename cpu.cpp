@@ -44,6 +44,21 @@ Cpu::Cpu() {
     // TODO: initialize all other values to 0? or random like gameboy?
 }
 
+uint16_t Cpu::get_PC(){
+    return PC;
+}
+
+uint16_t Cpu::get_SP() {
+    return SP;
+}
+
+void Cpu::set_PC(uint16_t bytes){
+    PC = bytes;
+}
+
+void Cpu::set_SP(uint16_t bytes){
+    SP = bytes;
+    
 int Cpu::write_memory(uint8_t address, uint8_t data) {
     if (address < 0x8000) {
         fprintf(stderr, "Tried to write to read-only memory");
