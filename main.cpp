@@ -1,4 +1,5 @@
 #include "cpu.h"
+#include "graphics.h"
 #include <cstdio>
 
 
