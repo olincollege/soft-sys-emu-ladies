@@ -1,11 +1,16 @@
 # soft-sys-emu-ladies
 
 TODOs:
-- Finish initializing memory locations
-- Makefile
-- more register and cpu tests
-- write memory function
-- get and set functions for PC, SP
+- Emma: Finish initializing memory locations
+- Emma: Makefile
+- Both: more register and cpu tests
+- Annabelle: get and set functions for PC, SP
+- Annabelle: figure out pixel encoding value
+
 
 - interrupts
 - graphics
+
+
+https://github.com/jgilchrist/gbemu
+http://www.ericbrasseur.org/cppcen.html?i=2
