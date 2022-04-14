@@ -11,3 +11,19 @@ Cpu::Cpu() {
 
     // memory[]
 }
+
+uint16_t Cpu::get_PC(){
+    return PC;
+}
+
+uint16_t Cpu::get_SP() {
+    return SP;
+}
+
+void Cpu::set_PC(uint16_t bytes){
+    PC = bytes;
+}
+
+void Cpu::set_SP(uint16_t bytes){
+    SP = bytes;
+}
