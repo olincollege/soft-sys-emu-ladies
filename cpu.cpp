@@ -58,6 +58,7 @@ void Cpu::set_PC(uint16_t bytes){
 
 void Cpu::set_SP(uint16_t bytes){
     SP = bytes;
+}
     
 int Cpu::write_memory(uint8_t address, uint8_t data) {
     if (address < 0x8000) {

@@ -1,6 +1,14 @@
 #include "screen.h"
 #include <cstdio>
 
+Screen::Screen() {
+    for (int i=0; i<160; i++) {
+        for (int j = 0; j < 144; j++) {
+            window[i][j] = bit_color_to_SDL_color(0);
+        }
+    }
+}
+
 void Screen::set_pixel(uint8_t color, int x, int y) {
     uint32_t pixel = bit_color_to_SDL_color(color);
     window[x][y] = pixel;
@@ -44,4 +52,8 @@ uint8_t Screen::SDL_color_to_bit_color(uint32_t color_SDL) {
             fprintf(stderr, "Unknown SDL color value\n");
             return -1;
         }
+}
+
+uint32_t* Screen::get_window() {
+    return &window;
 }
