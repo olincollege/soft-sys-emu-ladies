@@ -1,6 +1,6 @@
 // These tests would just be more complicated if we tried to use minunit
 // to compile:
-// 
+// g++ test_graphics.cpp ../graphics.cpp ../screen.cpp `sdl2-config --cflags --libs`
 
 #include "../screen.h"
 #include "../graphics.h"
@@ -9,7 +9,7 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 #define SCALE 10 //TODO: this scale copied from EmuWars, IDK what it means -Emma
-#define ROW_SIZE sizeof(uint8_t) * SCREEN_WIDTH
+#define ROW_SIZE sizeof(uint8_t) * SCREEN_WIDTH //TODO: basically same ^
 
 int main() {
     Screen screen;
