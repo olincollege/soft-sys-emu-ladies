@@ -10,6 +10,6 @@ void init_graphics(SDL_Window **window_pointer, SDL_Renderer **renderer_pointer,
     int textureWidth, int textureHeight);
 
 void update_graphics(SDL_Renderer **renderer, SDL_Texture **texture,\
-    uint8_t **screen, int rowSize);
+    uint32_t **screen, int rowSize);
 
 void quit_graphics(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture);

@@ -25,7 +25,7 @@ void init_graphics(SDL_Window **window_pointer, SDL_Renderer **renderer_pointer,
 }
 
 void update_graphics(SDL_Renderer **renderer, SDL_Texture **texture,\
-    uint8_t **screen, int rowSize) {
+    uint32_t **screen, int rowSize) {
     SDL_UpdateTexture(*texture, NULL, *screen, rowSize);
     SDL_RenderClear(*renderer);
     SDL_RenderCopy(*renderer, *texture, NULL, NULL);

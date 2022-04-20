@@ -55,5 +55,5 @@ uint8_t Screen::SDL_color_to_bit_color(uint32_t color_SDL) {
 }
 
 uint32_t* Screen::get_window() {
-    return &window;
+    return &window[0][0];
 }
