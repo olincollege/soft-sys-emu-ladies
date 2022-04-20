@@ -4,7 +4,7 @@
 Screen::Screen() {
     for (int i=0; i<160; i++) {
         for (int j = 0; j < 144; j++) {
-            window[i][j] = bit_color_to_SDL_color(0);
+            window[i][j] = bit_color_to_SDL_color(3);
         }
     }
 }

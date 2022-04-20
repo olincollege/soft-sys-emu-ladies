@@ -20,7 +20,7 @@ void init_graphics(SDL_Window **window_pointer, SDL_Renderer **renderer_pointer,
     }
 
     // create the texture 
-    *texture_pointer = SDL_CreateTexture(*renderer_pointer, SDL_PIXELFORMAT_RGB332, \
+    *texture_pointer = SDL_CreateTexture(*renderer_pointer, SDL_PIXELFORMAT_RGBA8888, \
             SDL_TEXTUREACCESS_STREAMING, textureWidth, textureHeight); 
 }
 
