@@ -4,7 +4,6 @@
 Screen::Screen() {
     for (int i=0; i<160; i++) {
         for (int j = 0; j < 144; j++) {
-            //window[i][j] = bit_color_to_SDL_color(3);
             set_pixel(1, i, j);
         }
     }
@@ -57,4 +56,24 @@ uint8_t Screen::SDL_color_to_bit_color(uint32_t color_SDL) {
 
 uint32_t* Screen::get_window() {
     return &window[0][0];
+}
+
+// tileset is referenced in lcd register - a bit, 0 or 1
+void load_tile(uint8_t tile_id, uin8_t tileset, Cpu *cpu)
+{
+
+    uint8_t = tile_size_in_memory = 16;
+    uint16_t tile_address = 0;
+
+    if (tileset == 1) {
+        tile_address = 0x8000 + (tile_id)*tile_size_in_memory;
+    } else if (tileset == 0) {
+        tile_address = 0x9000 + (int8_t)tile_id * tile_size_in_memory;
+    }
+
+    uint8_t row_byte1 = cpu->read_memory(tile_address);
+    uint8_t row_byte1 = cpu->read_memory(tile_address + 1);
+
+    // row_colors = 
+    // TODO: figure out getting pixels with the bytes merging
 }

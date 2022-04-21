@@ -9,6 +9,8 @@ class Screen {
         uint8_t SDL_color_to_bit_color(uint32_t);
         uint32_t* get_window();
 
+        void load_tile(uint8_t tile_id, uin8_t tileset, Cpu* cpu);
+
     private:
         uint32_t window[160][144];
 };
