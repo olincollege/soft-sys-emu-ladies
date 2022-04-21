@@ -10,7 +10,7 @@ graphics.o: graphics.cpp
 	g++ -Wall -c -o graphics.o graphics.cpp `sdl2-config --cflags --libs`
 
 screen.o: screen.cpp
-	g++ -Wall -c -o screen.o screen.cpp
+	g++ -Wall -c -o screen.o screen.cpp `sdl2-config --cflags --libs`
 
 cpu.o: cpu.cpp
 	g++ -Wall -c -o cpu.o cpu.cpp
@@ -22,4 +22,4 @@ test: register.o
 #TODO: why aren't the tests running?
 
 register.o: register.cpp
-	g++ -Wall -c -o register.o register.cpp
+	g++ -Wall -c -o register.o register.cpp 

@@ -9,7 +9,7 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 #define SCALE 1 //TODO: this scale copied from EmuWars, IDK what it means -Emma
-#define ROW_SIZE sizeof(uint8_t) * SCREEN_WIDTH //TODO: basically same ^
+#define ROW_SIZE sizeof(uint32_t) * SCREEN_WIDTH //TODO: basically same ^
 
 // putting this function here temporarily just so we can cleanly break out 
 // of the loop
@@ -40,7 +40,13 @@ int process_input() {
 
 int main() {
     Screen screen;
-    screen.set_pixel(3, 120, 120);
+
+    for (int i=0; i<160; i++) {
+        for (int j = 0; j < 70; j++) {
+            //window[i][j] = bit_color_to_SDL_color(3);
+            screen.set_pixel(0, i, j);
+        }
+    }
 
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -55,8 +61,6 @@ int main() {
     while (!quit) {
         quit = process_input();
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
-
-        //TODO: break out of loop condition
     }
 
     quit_graphics(window, renderer, texture);
