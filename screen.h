@@ -1,7 +1,9 @@
 #include <stdint.h>
+#include "cpu.h"
+
 class Screen {
     public:
-        Screen();
+        Screen(Cpu* cpu_ptr);
 
         uint32_t get_pixel();
         void set_pixel(uint8_t color, int x, int y);
@@ -9,8 +11,9 @@ class Screen {
         uint8_t SDL_color_to_bit_color(uint32_t);
         uint32_t* get_window();
 
-        void load_tile(uint8_t tile_id, uin8_t tileset, Cpu* cpu);
+        void load_tile(uint8_t tile_id, uint8_t tileset);
 
     private:
         uint32_t window[160][144];
+        Cpu* cpu;
 };
