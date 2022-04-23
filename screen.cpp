@@ -81,8 +81,8 @@ void Screen::load_tile(uint8_t tile_id, uint8_t tileset) {
         for (int bit_num = 0; bit_num < 8; bit_num++) {
             uint8_t color = (row_byte1 & 0b10000000) + ((row_byte2 & 0b10000000) << 1);
             set_pixel(color, tile_x_on_screen + bit_num, tile_y_on_screen + row_num);
-            row_byte1 << 1;
-            row_byte2 << 1;
+            row_byte1 <<= 1;
+            row_byte2 <<= 1;
         }
 
         tile_address += 2;
