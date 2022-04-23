@@ -11,6 +11,6 @@ TODOs:
 - interrupts
 - graphics
 
-
+Useful links:
 https://github.com/jgilchrist/gbemu
 http://www.ericbrasseur.org/cppcen.html?i=2
