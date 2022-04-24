@@ -8,7 +8,7 @@
 #define LY 0xFF44
 #define LYC 0xFF45
 #define WX 0xFF4A
-#define Wy 0xFF4B
+#define WY 0xFF4B
 
 class Screen {
     public:
@@ -20,7 +20,7 @@ class Screen {
         uint8_t SDL_color_to_bit_color(uint32_t);
         uint32_t* get_window();
 
-        void load_tile(uint8_t tile_id, uint8_t tileset);
+        void render_tiles();
 
     private:
         uint32_t window[160][144];
