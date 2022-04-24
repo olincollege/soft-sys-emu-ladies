@@ -1,6 +1,15 @@
 #include <stdint.h>
 #include "cpu.h"
 
+#define LCDC 0xFF40
+#define STAT 0xFF41
+#define SCY 0xFF42
+#define SCX 0xFF43
+#define LY 0xFF44
+#define LYC 0xFF45
+#define WX 0xFF4A
+#define Wy 0xFF4B
+
 class Screen {
     public:
         Screen(Cpu* cpu_ptr);
