@@ -72,7 +72,7 @@ void Screen::render_tiles() {
     uint8_t window_y = cpu->read_memory(WY);
 
     bool window = false;
-    
+
     // check if we're drawing a window in this scanline
     if ((LCD_control & 0x4) >> 2) {
         if (window_y  <= LY) {
@@ -81,16 +81,16 @@ void Screen::render_tiles() {
     }
 
     uint16_t tile_map_loc;  // this will store the location of the tile in the background map
-    
+
     // if there's no window, the background map will be here, otherwise the window will be here
-    if (!window) { 
+    if (!window) {
         if ((LCD_control & 0x10) >> 4) {
             tile_map_loc = 0x9C00;
         } else {
             tile_map_loc = 0x9800;
         }
     } else {
-       if ((LCD_control & 0x2) >> 1) { 
+       if ((LCD_control & 0x2) >> 1) {
            tile_map_loc = 0x9C00;
        } else {
            tile_map_loc = 0x9800;
@@ -98,38 +98,37 @@ void Screen::render_tiles() {
     }
 
     uint8_t abs_y = cpu->read_memory(LY) + scroll_y; // the absolute y position in the scanline
-    uint16_t tile_row = (abs_y / 8) * 32;  // the vertical tile. TODO: what data structure to use here?
-    
+    uint16_t tile_row = (abs_y >> 8) * 32;  // what tile we are on if the tiles were in a long line, granularity to row
+
     uint16_t tile_data_address = 0; // this will store where the actual tile data lives
 
 
-    for (int row_num = 0; row_num < 160; row_num++) {
-        uint8_t abs_x; // TODO: calculate the x position into the va
-        
-        // TODO: calculate tile col, not sure what data structure to use
-        
-        tile_map_loc = tile_map_loc + tile_row + tile_col; // this will store where the tile id lives in the background map
+    for (int pixel = 0; rpixel < 160; pixel++) {
+        uint8_t abs_x = pixel + scroll_x;
 
-        // TODO read the memory at the location calculated in tile_map_loc to get the tile id
+        //NOTE: some window stuff would go here. not implementing it.
 
+        uint16_t tile_col = abs_x >> 8;
+        uint16_t tile_id = tile_map_loc + tile_row + tile_col; // this will store where the tile id lives in the background map
+
+        // TODO codeslinger includes this 128 offset without explaining it. should check why it is there.
         if ((LCD_control & 0x8) >> 3) {
             tile_data_address = 0x8000 + (tile_id)*tile_size_in_memory;
         } else {
-            tile_data_address = 0x9000 + (int8_t)tile_id * tile_size_in_memory;
+            tile_data_address = 0x9000 + ((int8_t)tile_id + 128) * tile_size_in_memory;
         }
 
-        uint8_t row_byte1 = cpu->read_memory(tile_data_address);
-        uint8_t row_byte2 = cpu->read_memory(tile_data_address + 1);
+        // get the bytes that contain the row's color data
+        uint8_t row_within_tile = abs_y % 8;
+        uint16_t curr_row_address = tile_data_address + 2*row_within_tile;
+        uint8_t row_byte1 = cpu->read_memory(curr_row_address);
+        uint8_t row_byte2 = cpu->read_memory(curr_row_address + 1);
 
+        uint8_t pixel_within_row = abs_x % 8;
 
-        // below this line not refactored, variable names and logic may be wrong
-        for (int bit_num = 0; bit_num < 8; bit_num++) {
-            uint8_t color = (row_byte1 & 0b10000000) + ((row_byte2 & 0b10000000) << 1);
-            set_pixel(color, tile_x_on_screen + bit_num, tile_y_on_screen + row_num);
-            row_byte1 <<= 1;
-            row_byte2 <<= 1;
-        }
-
-        tile_address += 2;
+        //bitshifting to grab actual pixel data
+        uint8_t color = (row_byte1 & 1<<(8-pixel_within_row)) + ((row_byte2 & (8-pixel_within_row)) << 1);
+        //NOTE: some palatte stuff would go here. not implementing it.
+        set_pixel(color, abs_x, abs_y);
     }
 }
