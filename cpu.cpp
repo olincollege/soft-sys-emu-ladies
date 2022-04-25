@@ -5,7 +5,7 @@ Cpu::Cpu() {
     BC.set_all(0x0013);
     DE.set_all(0x00D8);
     HL.set_all(0x014D);
-    
+
     PC = 0x0100;
     SP = 0xFFFE;
 
@@ -59,8 +59,8 @@ void Cpu::set_PC(uint16_t bytes){
 void Cpu::set_SP(uint16_t bytes){
     SP = bytes;
 }
-    
-int Cpu::write_memory(uint8_t address, uint8_t data) {
+
+int Cpu::write_memory(uint16_t address, uint8_t data) {
     if (address < 0x8000) {
         fprintf(stderr, "Tried to write to read-only memory");
         return 0;
@@ -69,7 +69,7 @@ int Cpu::write_memory(uint8_t address, uint8_t data) {
         memory[address] = data;
         write_memory(address-0x2000, data);
         return 1;
-    
+
     } else if ((address >= 0xFEA0) && (address < 0xFEFF)) {
         fprintf(stderr, "Tried to write to restricted memory");
         return 0;
@@ -80,7 +80,7 @@ int Cpu::write_memory(uint8_t address, uint8_t data) {
     }
 }
 
-uint8_t Cpu::read_memory(uint8_t address) {
+uint8_t Cpu::read_memory(uint16_t address) {
     return memory[address];
     // TODO: we don't know if restricted memory is readable
 }

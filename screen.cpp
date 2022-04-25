@@ -62,13 +62,13 @@ uint32_t* Screen::get_window() {
 }
 
 // tileset is referenced in lcd register - a bit, 0 or 1
-void Screen::render_tiles() {
+void Screen::draw_scanline() {
     uint8_t tile_size_in_memory = 16;
 
     uint8_t LCD_control = cpu->read_memory(LCDC); // store the LCD control register
     uint8_t scroll_x = cpu->read_memory(SCX);
     uint8_t scroll_y = cpu->read_memory(SCY);
-    uint8_t window_x = cpu->read_memory(WX);
+    // uint8_t window_x = cpu->read_memory(WX);
     uint8_t window_y = cpu->read_memory(WY);
 
     bool window = false;
@@ -103,7 +103,7 @@ void Screen::render_tiles() {
     uint16_t tile_data_address = 0; // this will store where the actual tile data lives
 
 
-    for (int pixel = 0; rpixel < 160; pixel++) {
+    for (int pixel = 0; pixel < 160; pixel++) {
         uint8_t abs_x = pixel + scroll_x;
 
         //NOTE: some window stuff would go here. not implementing it.
