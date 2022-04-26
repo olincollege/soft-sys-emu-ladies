@@ -22,4 +22,4 @@ test: register.o
 #TODO: why aren't the tests running?
 
 register.o: register.cpp
-	g++ -Wall -c -o register.o register.cpp 
+	g++ -Wall -c -o register.o register.cpp
