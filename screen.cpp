@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <stdint.h>
 
+int scanline_counter = 0;
+
 Screen::Screen(Cpu* cpu_ptr) {
     cpu = cpu_ptr;
 
@@ -59,6 +61,37 @@ uint8_t Screen::SDL_color_to_bit_color(uint32_t color_SDL) {
 
 uint32_t* Screen::get_window() {
     return &window[0][0];
+}
+
+void Screen::draw_all_scanlines(int cycles) {
+  scanline_counter += cycles;
+
+  if (scanline_counter >= 456) {
+    //move to the next line
+    uint8_t curr_line = cpu->read_memory(LY);
+    curr_line++;
+    cpu->write_memory(LY, curr_line);
+
+    scanline_counter = 0;
+
+    if (curr_line == 144) {
+      // TODO: ENTER VBLANK
+
+    } else if (curr_line > 154) { // go back to the first line
+      cpu->write_memory(LY, 0);
+
+    } else if (curr_line < 144) {
+      draw_scanline();
+    }
+  }
+}
+
+//vblank, hblank stuff
+void Screen::set_lcd_status() {
+  uint8_t lcd_status = cpu->read_memory(STAT);
+  uint8_t curr_line = cpu->read_memory(LY);
+
+  // rest of the stuff.... do we need to implement interrupts?
 }
 
 // tileset is referenced in lcd register - a bit, 0 or 1

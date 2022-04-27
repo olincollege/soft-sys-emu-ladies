@@ -26,7 +26,7 @@ int main() {
     int quit = 0;
     while (!quit) {
         quit = process_input();
-        screen.draw_scanline();
+        screen.draw_all_scanlines(456);
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
     }
 

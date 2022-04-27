@@ -20,7 +20,9 @@ class Screen {
         uint8_t SDL_color_to_bit_color(uint32_t);
         uint32_t* get_window();
 
+        void draw_all_scanlines(int cycles);
         void draw_scanline();
+        void set_lcd_status();
 
     private:
         uint32_t window[160][144];
