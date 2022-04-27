@@ -16,7 +16,7 @@ Screen::Screen(Cpu* cpu_ptr) {
 
 void Screen::set_pixel(uint8_t color, int x, int y) {
     uint32_t pixel = bit_color_to_SDL_color(color);
-    window[x][y] = pixel;
+    window[x + width * y] = pixel;
 }
 
 uint32_t Screen::bit_color_to_SDL_color(uint8_t color_bits) {
@@ -60,7 +60,7 @@ uint8_t Screen::SDL_color_to_bit_color(uint32_t color_SDL) {
 }
 
 uint32_t* Screen::get_window() {
-    return &window[0][0];
+    return &window[0];
 }
 
 void Screen::draw_all_scanlines(int cycles) {
@@ -88,8 +88,8 @@ void Screen::draw_all_scanlines(int cycles) {
 
 //vblank, hblank stuff
 void Screen::set_lcd_status() {
-  uint8_t lcd_status = cpu->read_memory(STAT);
-  uint8_t curr_line = cpu->read_memory(LY);
+  //uint8_t lcd_status = cpu->read_memory(STAT);
+  //uint8_t curr_line = cpu->read_memory(LY);
 
   // rest of the stuff.... do we need to implement interrupts?
 }

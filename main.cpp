@@ -19,14 +19,14 @@ int main() {
     SDL_Texture *texture;
 
     // initialize the graphics
-    init_graphics(&window, &renderer, &texture, SCREEN_WIDTH * SCALE,
-                  SCREEN_HEIGHT * SCALE, SCREEN_WIDTH, SCREEN_HEIGHT);
+    init_graphics(&window, &renderer, &texture, screen.width * SCALE,
+                  screen.height * SCALE, screen.width, screen.height);
 
     uint32_t* screen_loc = screen.get_window();
     int quit = 0;
     while (!quit) {
         quit = process_input();
-        screen.draw_all_scanlines(456);
+        //screen.draw_all_scanlines(456);
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
     }
 

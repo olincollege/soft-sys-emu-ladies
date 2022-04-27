@@ -13,6 +13,10 @@
 class Screen {
     public:
         Screen(Cpu* cpu_ptr);
+        
+        static const int width = 160;
+        static const int height = 144;
+        static const int row_size = sizeof(uint32_t) * width;
 
         uint32_t get_pixel();
         void set_pixel(uint8_t color, int x, int y);
@@ -25,6 +29,6 @@ class Screen {
         void set_lcd_status();
 
     private:
-        uint32_t window[160][144];
+        uint32_t window[160 * 144];
         Cpu* cpu;
 };
