@@ -9,6 +9,7 @@ Cpu::Cpu() {
     PC = 0x0100;
     SP = 0xFFFE;
 
+    
     memory[0xFF05] = 0x00;
     memory[0xFF06] = 0x00;
     memory[0xFF07] = 0x00;
@@ -40,8 +41,24 @@ Cpu::Cpu() {
     memory[0xFF4A] = 0x00;
     memory[0xFF4B] = 0x00;
     memory[0xFFFF] = 0x00;
+    
 
     // TODO: initialize all other values to 0? or random like gameboy?
+}
+
+void Cpu::load_rom(const char* filename) {
+    FILE* game;
+
+    game = fopen(filename, "rb");
+
+    if (NULL == game) {
+        fprintf(stderr, "Unable to open game: %s\n", filename);
+        //exit(1);
+    }
+    // Read the game data into memory starting at address 0x200
+    fread(&memory[0], 1, 0x10000, game);
+
+    fclose(game);
 }
 
 uint16_t Cpu::get_PC(){

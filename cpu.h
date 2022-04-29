@@ -10,6 +10,7 @@ public:
     Register HL;
 
     Cpu();
+    void load_rom(const char* filename);
     uint16_t get_PC();
     uint16_t get_SP();
     void set_PC(uint16_t bytes);

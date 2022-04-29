@@ -9,7 +9,7 @@ Screen::Screen(Cpu* cpu_ptr) {
 
     for (int i=0; i<160; i++) {
         for (int j = 0; j < 144; j++) {
-            set_pixel(1, i, j);
+            set_pixel(3, i, j);
         }
     }
 }
