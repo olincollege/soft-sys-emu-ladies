@@ -3,6 +3,8 @@
 #include <cstdio>
 #include <inttypes.h>
 
+const int MAX_CYCLES = 5;
+
 int main(int argc, char const *argv[]) {
     if (argc != 2) {
 		fprintf(stderr, "Please provide a filename");
@@ -19,17 +21,6 @@ int main(int argc, char const *argv[]) {
         printf("%" PRIu8 "\n", cpu.read_memory(i));
     }
 
-
-    /*
-    //TODO: this is test code and should be moved
-    for (int i=0; i<160; i++) {
-        for (int j = 0; j < 70; j++) {
-            //window[i][j] = bit_color_to_SDL_color(3);
-            screen.set_pixel(0, i, j);
-        }
-    }
-    */
-
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
@@ -40,10 +31,19 @@ int main(int argc, char const *argv[]) {
 
     uint32_t* screen_loc = screen.get_window();
     int quit = 0;
-    while (!quit) {
+    int counter = 0;
+    // while (!quit) {
+    while (counter < 5) {
         quit = process_input();
-        screen.draw_all_scanlines(456);
+        int cycles_this_update = 0;
+        
+        while (cycles_this_update < MAX_CYCLES) {
+            cycles_this_update += cpu.execute_next_opcode();
+            screen.draw_all_scanlines(cycles_this_update);
+        }
+
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
+        counter++;
     }
 
     quit_graphics(window, renderer, texture);
