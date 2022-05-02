@@ -37,10 +37,11 @@ int main(int argc, char const *argv[]) {
         quit = process_input();
         int cycles_this_update = 0;
         
-        while (cycles_this_update < MAX_CYCLES) {
+        //while (cycles_this_update < MAX_CYCLES) {
             cycles_this_update += cpu.execute_next_opcode();
+            printf("Cycles this update: %d\n", cycles_this_update);
             screen.draw_all_scanlines(cycles_this_update);
-        }
+        //}
 
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
         counter++;

@@ -1,7 +1,7 @@
 #TODO: put .o's and outputs in a folder
 
-emu: main.o graphics.o cpu.o register.o screen.o
-	g++ -Wall -g -o emu main.o screen.o graphics.o cpu.o register.o `sdl2-config --cflags --libs`
+emu: main.o graphics.o cpu.o register.o screen.o opcodes.o
+	g++ -Wall -g -o emu main.o screen.o graphics.o cpu.o register.o opcodes.o `sdl2-config --cflags --libs`
 
 main.o: main.cpp
 	g++ -Wall -c -o main.o main.cpp `sdl2-config --cflags --libs`
@@ -17,6 +17,9 @@ cpu.o: cpu.cpp cpu.h
 
 register.o: register.cpp register.h
 	g++ -Wall -c -o register.o register.cpp
+
+opcodes.o: opcodes.cpp cpu.h
+	g++ -Wall -c -o opcodes.o opcodes.cpp
 
 test:
 	gcc -o testregisters unit_tests/test_registers.cpp register.cpp

@@ -56,7 +56,7 @@ void Cpu::load_rom(const char* filename) {
         //exit(1);
     }
     // Read the game data into memory starting at address 0x200
-    fread(&memory[0x100], 1, 0x10000, game);
+    fread(&memory[0], 1, 0x10000, game);
 
     fclose(game);
 }
@@ -82,10 +82,19 @@ void Cpu::set_SP(uint16_t bytes){
 }
 
 int Cpu::execute_next_opcode() {
-    printf("Opcode = 0x%x\n", read_memory(PC));
+    uint8_t opcode = read_memory(PC);
+    int cycles = 0;
+    printf("Opcode = 0x%x\n", opcode);
     inc_PC();
+    switch (opcode) {
+        case 0xC3:
+            cycles = op_jpnn();
+            break;
+        default:
+            printf("Unknown opcode: %x\n", opcode);
+    }
     //printf("PC = %d", PC);
-    return 60;
+    return cycles;
 }
 
 int Cpu::write_memory(uint16_t address, uint8_t data) {
