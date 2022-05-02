@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <inttypes.h>
 
-const int MAX_CYCLES = 5;
+const int MAX_CYCLES = 69905;
 
 int main(int argc, char const *argv[]) {
     if (argc != 2) {
@@ -32,16 +32,16 @@ int main(int argc, char const *argv[]) {
     uint32_t* screen_loc = screen.get_window();
     int quit = 0;
     int counter = 0;
-    // while (!quit) {
-    while (counter < 5) {
+    while (!quit) {
+    // while (counter < 5) {
         quit = process_input();
         int cycles_this_update = 0;
         
-        //while (cycles_this_update < MAX_CYCLES) {
+        while (cycles_this_update < MAX_CYCLES) {
             cycles_this_update += cpu.execute_next_opcode();
             printf("Cycles this update: %d\n", cycles_this_update);
             screen.draw_all_scanlines(cycles_this_update);
-        //}
+        }
 
         update_graphics(&renderer, &texture, &screen_loc, ROW_SIZE);
         counter++;
